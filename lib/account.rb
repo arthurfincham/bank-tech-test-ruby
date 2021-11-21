@@ -6,4 +6,15 @@ class Account
     @balance = 0
     @history = history
   end
+
+  def deposit(amount, date)
+    @balance += amount
+    @history.add(amount, date)
+  end
+
+  def withdraw(amount, date)
+    raise "Insufficient funds." if @balance < amount 
+    @balance -= amount
+    @history.add(amount, date)
+  end
 end
