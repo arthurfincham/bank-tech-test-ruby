@@ -1,4 +1,3 @@
-Resolving dependencies...
 require "transaction_history"
 
 describe TransactionHistory do
