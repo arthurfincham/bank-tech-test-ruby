@@ -2,9 +2,16 @@ Resolving dependencies...
 require "transaction_history"
 
 describe TransactionHistory do
+
   let(:transaction_1) { double :transaction, amount: 10, date: Date.new(2021, 10, 21), balance: 10 }
   let(:transaction_2) { double :transaction, amount: 20, date: Date.new(2021, 10, 22), balance: 30 }
   let(:transaction_3) { double :transaction, amount: 15, date: Date.new(2021, 10, 23), balance: 15 }
+  
+  before do
+    allow(transaction_1).to receive(:get_balance).and_return(10)
+    allow(transaction_2).to receive(:get_balance).and_return(30)
+    allow(transaction_3).to receive(:get_balance).and_return(15)
+  end
 
   describe ".add" do
     it "adds transaction to memory" do
@@ -17,8 +24,6 @@ describe TransactionHistory do
     it "returns true if the transaction adds to balance" do
       subject.add(transaction_1)
       subject.add(transaction_2)
-      allow(transaction_1).to receive(:get_balance).and_return(10)
-      allow(transaction_2).to receive(:get_balance).and_return(20)
       expect(subject.is_a_deposit(transaction_2)).to be true
     end
   end
@@ -31,9 +36,6 @@ describe TransactionHistory do
 
   describe ".statement" do
     it "prints the format" do
-      allow(transaction_1).to receive(:get_balance).and_return(10)
-      allow(transaction_2).to receive(:get_balance).and_return(30)
-      allow(transaction_3).to receive(:get_balance).and_return(15)
       subject.add(transaction_1)
       subject.add(transaction_2)
       subject.add(transaction_3)
