@@ -1,24 +1,26 @@
-require 'transaction_history'
+require './lib/transaction'
+require './lib/transaction_history'
 
 class Account
   attr_reader :balance, :history
-  def initialize
+  def initialize(transaction_history = TransactionHistory)
     @balance = 0
-    @history = []
+    @history = transaction_history.new
   end
 
   def deposit(amount, date)
     @balance += amount
-    @history.add(amount, date)
+    new_transaction(amount, date)
   end
 
   def withdraw(amount, date)
     raise "Insufficient funds." if @balance < amount 
     @balance -= amount
-    @history.add(amount, date)
+    new_transaction(amount, date)
   end
 
   def new_transaction(amount, date)
-
+    tran = Transaction.new(amount, date, @balance)
+    @history.add(tran)
   end
 end
