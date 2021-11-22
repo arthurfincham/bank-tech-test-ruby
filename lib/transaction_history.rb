@@ -21,15 +21,19 @@ class TransactionHistory
   def statement
     puts "DATE      ||" + "CREDIT    ||" + "DEBIT     ||" + "BALANCE    "
     @memory.each do |item|
-      if is_a_deposit(item)
-        puts format_cell(item.date) + "||" +
-               format_cell(item.amount) + "||" + format_cell(" ") + "||" +
-               format_cell(item.balance)
-      else
-        puts format_cell(item.date) + "||" +
-               format_cell(" ") + "||" + format_cell(item.amount) + "||" +
-               format_cell(item.balance)
-      end
+      is_a_deposit(item) ? print_credit(item) : print_debit(item)
     end
+  end
+
+  def print_credit(item)
+    puts format_cell(item.date) + "||" +
+           format_cell(item.amount) + "||" + format_cell(" ") + "||" +
+           format_cell(item.balance)
+  end
+
+  def print_debit(item)
+    puts format_cell(item.date) + "||" +
+           format_cell(" ") + "||" + format_cell(item.amount) + "||" +
+           format_cell(item.balance)
   end
 end
