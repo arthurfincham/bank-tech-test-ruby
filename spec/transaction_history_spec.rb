@@ -21,6 +21,11 @@ describe TransactionHistory do
     end
   end
 
+  describe ".format_cell" do
+    it 'left aligns data within 10 spaces' do
+      expect(subject.format_cell("100")).to eq "100       "
+    end
+  end
 
 
 end
