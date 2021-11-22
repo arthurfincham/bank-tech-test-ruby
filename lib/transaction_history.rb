@@ -11,6 +11,10 @@ class TransactionHistory
 
   def is_a_deposit(item)
     i = @memory.find_index(item)
-    @memory[i].get_balance > @memory[i-1].get_balance || i == 0 ? true : false
+    @memory[i].get_balance > @memory[i - 1].get_balance || i == 0 ? true : false
+  end
+
+  def format_cell(data)
+    data.to_s.ljust(10, " ")
   end
 end
