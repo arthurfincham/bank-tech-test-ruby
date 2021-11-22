@@ -1,4 +1,5 @@
 class TransactionHistory
+  HEADER = "DATE      ||CREDIT    ||DEBIT     ||BALANCE    \n"
   attr_reader :memory
 
   def initialize
@@ -19,21 +20,18 @@ class TransactionHistory
   end
 
   def statement
-    puts "DATE      ||" + "CREDIT    ||" + "DEBIT     ||" + "BALANCE    "
+    paper = [HEADER]
     @memory.each do |item|
-      is_a_deposit(item) ? print_credit(item) : print_debit(item)
+      is_a_deposit(item) ? paper << print_credit(item) : paper << print_debit(item)
     end
+    print paper.join("")
   end
 
   def print_credit(item)
-    puts format_cell(item.date) + "||" +
-           format_cell(item.amount) + "||" + format_cell(" ") + "||" +
-           format_cell(item.balance)
+    "#{format_cell(item.date)}||#{format_cell(item.amount)}||#{format_cell('')}||#{format_cell(item.balance)}\n"
   end
 
   def print_debit(item)
-    puts format_cell(item.date) + "||" +
-           format_cell(" ") + "||" + format_cell(item.amount) + "||" +
-           format_cell(item.balance)
+   "#{format_cell(item.date)}||#{format_cell("")}||#{format_cell(item.amount)}||#{format_cell(item.balance)}\n"
   end
 end
