@@ -19,8 +19,8 @@ class Account
     new_transaction(amount, date)
   end
 
-  def new_transaction(amount, date)
-    tran = Transaction.new(amount, date, @balance)
+  def new_transaction(amount, date, transaction = Transaction)
+    tran = transaction.new(amount, date, @balance)
     @history.add(tran)
   end
 end
