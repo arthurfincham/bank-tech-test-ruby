@@ -1,6 +1,7 @@
 <div align="center">
 
 # Bank Tech Test
+[![coverage](https://github.com/arthurfincham/bank-tech-test-ruby/blob/main/coverage/coverage.svg)](https://github.com/arthurfincham/bank-tech-test-ruby/blob/main/coverage/coverage.svg)
 
 </div>
 
