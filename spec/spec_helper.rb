@@ -1,8 +1,11 @@
 require "simplecov"
 require "simplecov-console"
+require "simplecov-formatter-badge"
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,
+  SimpleCov::Formatter::HTMLFormatter,
+ SimpleCov::Formatter::BadgeFormatter
 ])
 SimpleCov.start
 
